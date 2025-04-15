@@ -1,4 +1,4 @@
-#include <string>
+#include <cstring>
 #include <32blit.hpp>
 #include "commonvars.hpp"
 #include "palettedefines.hpp"

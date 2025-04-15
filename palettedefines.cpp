@@ -1,4 +1,3 @@
-#include <cstring>
 #include <32blit.hpp>
 #include "palettedefines.hpp"
 
