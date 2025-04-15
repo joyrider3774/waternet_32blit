@@ -90,12 +90,12 @@ void setPaletteGame()
 
     switch(palIndex)
     {
-        case 0: memcpy(pal, GB_PALETTE, 4 * sizeof(Pen)); break;
-        case 1: memcpy(pal, BLACK_WHITE_PALETTE_GAME, 4 * sizeof(Pen)); break;
-        case 2: memcpy(pal, GBC_PALETTE_GAME, 4 * sizeof(Pen)); break;
-        case 3: memcpy(pal, RED_PALETTE_GAME, 4 * sizeof(Pen)); break;
-        case 4: memcpy(pal, WHITE_BLUE_PALETTE_GAME, 4 * sizeof(Pen)); break;
-        case 5: memcpy(pal, TROPICAL_PALETTE_GAME, 4 * sizeof(Pen)); break;
+        case 0: setPal(pal, GB_PALETTE, 4); break;
+        case 1: setPal(pal, BLACK_WHITE_PALETTE_GAME, 4); break;
+        case 2: setPal(pal, GBC_PALETTE_GAME, 4); break;
+        case 3: setPal(pal, RED_PALETTE_GAME, 4); break;
+        case 4: setPal(pal, WHITE_BLUE_PALETTE_GAME, 4); break;
+        case 5: setPal(pal, TROPICAL_PALETTE_GAME, 4); break;
     }
     
     if(inverseColors)
