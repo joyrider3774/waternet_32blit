@@ -2,10 +2,12 @@
 cmake_minimum_required(VERSION 3.9)
 
 # Replace "game" with a name for your project (this is used the name of the output)
-project(game)
+project(Waternet)
 
 # Add your sources here (adding headers is optional, but helps some CMake generators)
-set(PROJECT_SOURCE game.cpp game.hpp)
+set(PROJECT_SOURCE waternet.cpp intro.cpp commonvars.cpp palettes.cpp palettedefines.cpp 
+  printfuncs.cpp helperfuncs.cpp savestate.cpp level.cpp titlescreen.cpp sound.cpp
+  helpscreens.cpp cursor.cpp levelselect.cpp game.cpp levelscleared.cpp)
 
 # ... and any other files you want in the release here
 set(PROJECT_DISTRIBS LICENSE README.md)

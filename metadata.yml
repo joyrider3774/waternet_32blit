@@ -1,10 +1,10 @@
-title: game title
-description: game description
-author: you
+title: Waternet
+description: Waternet is a multiplatform puzzle game written for old consoles and handhelds
+author: Willems Davy
 splash:
-  file: assets/no-image.png
+  file: assets/image.png
 icon:
-  file: assets/no-icon.png
-version: v0.0.1
-category: game # game, demo, utility, ...
-url: https://github.com/32blit/32blit-boilerplate
+  file: assets/icon.png
+version: v1.0.0
+category: game
+url: https://github.com/joyrider3774/waternet_32blit

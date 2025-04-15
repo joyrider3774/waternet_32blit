@@ -3,6 +3,15 @@
 # References can be picked up by including assets.hpp
 
 assets.cpp:
-  assets/no-image.png:
-    name: asset_no_image
-
+  assets/titlescreen_8x8.png:
+    name: titlescreen_8x8
+  assets/blocktiles_8x8.png:
+    name: blocktiles_8x8
+  assets/titlescreen2_8x8.png:
+    name: titlescreen2_8x8
+  assets/selectortiles_8x8.png:
+    name: selectortiles_8x8
+  assets/congratsscreen_8x8.png:
+    name: congratsscreen_8x8
+  assets/congratstiles_8x8.png:
+    name: congratstiles_8x8
