@@ -91,7 +91,8 @@ void render(uint32_t time)
         case gsIntro:
             intro_render();
             break;
-    }    
+    }
+
     //printDebugCpuRamLoad();
  }
 

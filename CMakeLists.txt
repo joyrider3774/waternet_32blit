@@ -1,8 +1,14 @@
 # Basic parameters; check that these match your project / environment
 cmake_minimum_required(VERSION 3.9)
 
+OPTION(DISABLE_READ_ONLY_SURFACES "Disable Readonly Surfaces" OFF) # Enabled by default
+
 # Replace "game" with a name for your project (this is used the name of the output)
 project(Waternet)
+
+IF(DISABLE_READ_ONLY_SURFACES)
+    ADD_DEFINITIONS(-DDISABLE_READ_ONLY_SURFACES)
+ENDIF(DISABLE_READ_ONLY_SURFACES)
 
 # Add your sources here (adding headers is optional, but helps some CMake generators)
 set(PROJECT_SOURCE waternet.cpp intro.cpp commonvars.cpp palettes.cpp palettedefines.cpp 

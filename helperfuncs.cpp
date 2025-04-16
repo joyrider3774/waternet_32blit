@@ -40,10 +40,19 @@ void setBlockTilesAsBackground()
 
 void loadGraphics()
 {
+#ifdef DISABLE_READ_ONLY_SURFACES
   titlescreen = Surface::load(titlescreen_8x8);
   blockTiles = Surface::load(blocktiles_8x8);
   fullTitlescreenMap = Surface::load(titlescreen2_8x8);
   selectorTiles = Surface::load(selectortiles_8x8);
   congratsMap = Surface::load(congratsscreen_8x8);
   congratsScreenTiles = Surface::load(congratstiles_8x8);
+#else
+  titlescreen = Surface::load_read_only(titlescreen_8x8);
+  blockTiles = Surface::load_read_only(blocktiles_8x8);
+  fullTitlescreenMap = Surface::load_read_only(titlescreen2_8x8);
+  selectorTiles = Surface::load_read_only(selectortiles_8x8);
+  congratsMap = Surface::load_read_only(congratsscreen_8x8);
+  congratsScreenTiles = Surface::load_read_only(congratstiles_8x8);
+#endif
 }

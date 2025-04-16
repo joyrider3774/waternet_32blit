@@ -70,7 +70,11 @@ constexpr uint8_t opMusic = 0;
 constexpr uint8_t opSound = 1;
 constexpr uint8_t opColor = 2;
 constexpr uint8_t opColorInvert = 3;
+#ifdef DISABLE_READ_ONLY_SURFACES
 constexpr uint8_t opCount = 4;
+#else
+constexpr uint8_t opCount = 2;
+#endif
 
 constexpr uint8_t tsMainMenu = 0;
 constexpr uint8_t tsGameMode = 1;

@@ -5,13 +5,19 @@
 assets.cpp:
   assets/titlescreen_8x8.png:
     name: titlescreen_8x8
+    packed: false
   assets/blocktiles_8x8.png:
     name: blocktiles_8x8
+    packed: false
   assets/titlescreen2_8x8.png:
     name: titlescreen2_8x8
+    packed: false
   assets/selectortiles_8x8.png:
     name: selectortiles_8x8
+    packed: false
   assets/congratsscreen_8x8.png:
     name: congratsscreen_8x8
+    packed: false
   assets/congratstiles_8x8.png:
     name: congratstiles_8x8
+    packed: false

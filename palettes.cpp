@@ -6,7 +6,7 @@
 using namespace blit;
 
 uint8_t palIndex = 0;
-uint8_t inverseColors = 1;
+uint8_t inverseColors = 0;
 Pen pal[4];
 
 #define setPal(Dest, Source, Count) for (int i = 0; i < Count; i++) Dest[i] = Source[i];
@@ -25,14 +25,22 @@ uint8_t getMaxPalettes()
 
 void setPalIndex(uint8_t index)
 {
+#ifdef DISABLE_READ_ONLY_SURFACES
   palIndex = index;
+#else
+  palIndex = 0;
+#endif
   //only possible to change on title
   setPaletteTitle();
 }
 
 void setPalInverse(uint8_t value)
 {
+#ifdef DISABLE_READ_ONLY_SURFACES
     inverseColors = value;
+#else
+    inverseColors = 0;
+#endif
     //only possible to change on title
     setPaletteTitle();
 }
@@ -50,7 +58,6 @@ uint8_t getPalIndex()
 
 void setPaletteTitle()
 {
-
     switch(palIndex)
     {
         case 0: setPal(pal, GB_PALETTE, 4); break;
@@ -73,7 +80,8 @@ void setPaletteTitle()
         pal[1] = tmp0;
         pal[0] = tmp1;
     }
-    
+
+#ifdef DISABLE_READ_ONLY_SURFACES
     for (int i=0; i < 4; i ++)
     {
         titlescreen->palette[i] = pal[i];
@@ -83,6 +91,7 @@ void setPaletteTitle()
         fullTitlescreenMap->palette[i] = pal[i];
     }
     selectorTiles->palette[1] = pal[1];
+#endif
 }
 
 void setPaletteGame()
@@ -111,6 +120,7 @@ void setPaletteGame()
         pal[0] = tmp1;
     }
 
+#ifdef DISABLE_READ_ONLY_SURFACES
     for (int i=0; i < 4; i ++)
     {
         titlescreen->palette[i] = pal[i];
@@ -120,6 +130,7 @@ void setPaletteGame()
         fullTitlescreenMap->palette[i] = pal[i];
     }
     selectorTiles->palette[1] = pal[1];
+#endif
 }
 
 const char* getPaletteName()

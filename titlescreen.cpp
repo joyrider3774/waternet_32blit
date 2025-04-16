@@ -60,6 +60,7 @@ void drawTitleScreen()
             else
                 printMessage(5, 11, "SOUND  OFF");
             
+#ifdef DISABLE_READ_ONLY_SURFACES                
             printMessage(5, 12, getPaletteName());
             
             if(getPalInverse())
@@ -67,6 +68,7 @@ void drawTitleScreen()
             else
                 printMessage(5, 13, "INVERT OFF");
             break;
+#endif
     }
 
     //set menu tile
