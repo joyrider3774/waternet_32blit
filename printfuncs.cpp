@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <malloc.h>
 #include <32blit.hpp>
+
 
 #include "commonvars.hpp"
 #include "printfuncs.hpp"
