@@ -2,9 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <malloc.h>
 #include <32blit.hpp>
 
+#if defined(TARGET_32BLIT_HW) || defined(PICO_BUILD)
+#include <malloc.h>
+#endif
 
 #include "commonvars.hpp"
 #include "printfuncs.hpp"
