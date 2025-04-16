@@ -50,10 +50,10 @@ void init()
 
 void render(uint32_t time) 
 {
-    if ((prevTime != 0) && ((time - prevTime) < (1000 / frameRate)))
-        return;
+    //if ((prevTime != 0) && ((time - prevTime) < (1000 / frameRate)))
+    //    return;
 
-    prevTime = time;
+    //prevTime = time;
 
     //gamestate handling
     switch (gameState)
