@@ -28,7 +28,7 @@ void setPalIndex(uint8_t index)
 #ifdef DISABLE_READ_ONLY_SURFACES
   palIndex = index;
 #else
-  palIndex = 0;
+  palIndex = 4;
 #endif
   //only possible to change on title
   setPaletteTitle();
