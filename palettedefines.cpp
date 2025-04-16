@@ -4,17 +4,17 @@
 using namespace blit;
 
 const Pen BLACK_WHITE_PALETTE_GAME[] = {
-    Pen(0,0,0), // 0x0
     Pen(181,181,181), // 0x3
-    Pen(255,255,255), // 0x1
-    Pen(130,130,130), // 0x2
+    Pen(0,0,0), // 0x0 
+    Pen(111,111,111), // 0x2
+    Pen(130,130,130), // 0x1
 };
 
 const Pen BLACK_WHITE_PALETTE_TITLE[] = {
-    Pen(0,0,0), // 0x0
     Pen(181,181,181), // 0x3
-    Pen(111,111,111), // 0x2
+    Pen(0,0,0), // 0x0
     Pen(10,10,10), // 0x1
+    Pen(111,111,111), // 0x2
 };
 
 const Pen WHITE_BLUE_PALETTE_TITLE[] = {
