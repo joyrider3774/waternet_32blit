@@ -519,29 +519,29 @@ void initLevel(uint32_t aRandomSeed)
     {
         case diffVeryEasy:
             boardWidth = 6U;
-            boardHeight = 5U;
+            boardHeight = 6U;
             break;
         case diffEasy:
             boardWidth = 8U;
-            boardHeight = 7U;
+            boardHeight = 8U;
             break;
         case diffNormal:
             boardWidth = 10U;
-            boardHeight = 9U;
+            boardHeight = 10U;
             break;
         case diffHard:
             boardWidth = 12U;
-            boardHeight = 11U;
+            boardHeight = 12U;
             break;
         case diffVeryHard:
             boardWidth = 12U;
-            boardHeight = 13U;
+            boardHeight = 14U;
             break;    
         case diffRandom:
             uint8_t rnd = rand() % 255;
             boardWidth = 6 + (rnd % (maxBoardWidth - 6 + 1)); //6 is smallest level width from very easy
             rnd = rand() % 255;
-            boardHeight = 5 + (rnd % (maxBoardHeight - 5 + 1)); //5 is smallest level height from very easy
+            boardHeight = 6 + (rnd % (maxBoardHeight - 6 + 1)); //6 is smallest level height from very easy
             maxLevel = 0; //special value with random
             break;
     }

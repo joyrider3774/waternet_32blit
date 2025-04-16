@@ -41,7 +41,11 @@ void intro_render()
         }
         else
         {
-            screen.blit(titlescreen, titlescreen->clip, Point(0, titlePosY));
+            screen.stretch_blit(titlescreen, 
+                Rect(0,0,titlescreen->bounds.w, titlescreen->bounds.h), 
+                Rect(xoffset,(int32_t)((float)yoffset + titlePosY*scale),
+                (int32_t)((float)titlescreen->bounds.w*scale), 
+                (int32_t)((float)titlescreen->bounds.h*scale)));
             if(titlePosY > 0)
             {
                 titlePosY -= (float)60/(float)frameRate;

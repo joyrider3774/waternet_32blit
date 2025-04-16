@@ -8,17 +8,17 @@
 using namespace blit;
 
 constexpr uint8_t maxBoardWidth = 12U;
-constexpr uint8_t maxBoardHeight = 13U;
+constexpr uint8_t maxBoardHeight = 14U;
 
 constexpr uint8_t maxBoardBgWidth = 14U;
-constexpr uint8_t maxBoardBgHeight = 15U;
+constexpr uint8_t maxBoardBgHeight = 16U;
 
 constexpr uint8_t screenWidth = 160;
 constexpr uint8_t screenHeight = 128;
 
 constexpr uint8_t maxBoardSize = maxBoardWidth * maxBoardHeight;
 
-constexpr uint8_t tileSize = 8;
+constexpr float_t tileSize = 8.0f;
 
 constexpr uint8_t gsGame = 0;
 constexpr uint8_t gsTitle = 1;
@@ -109,4 +109,7 @@ extern Surface *congratsMap;
 extern Surface *selectorTiles;
 extern Surface *congratsScreenTiles;
 extern Surface *fullTitlescreenMap;
+extern float scale;
+extern int xoffset;
+extern int yoffset;
 #endif

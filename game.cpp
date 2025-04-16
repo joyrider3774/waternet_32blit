@@ -32,7 +32,8 @@ uint8_t drawGame(uint8_t drawWhat)
     if(drawWhat & drwUi)
     {
         screen.pen = getColor(0);
-        screen.rectangle(Rect(maxBoardBgWidth * 8, 0, screenWidth - (maxBoardBgWidth * 8), screenHeight));
+        screen.rectangle(Rect((int32_t)((float)maxBoardBgWidth * tileSize *scale  +xoffset), yoffset, 
+           (int32_t)((screenWidth - ((float)maxBoardBgWidth * tileSize)) * scale), (int32_t)((float)screenHeight*scale)));
          //LEVEL:
         printMessage(maxBoardBgWidth, 0, "LEVEL:");
         
@@ -69,7 +70,8 @@ uint8_t drawGame(uint8_t drawWhat)
         if(!(drawWhat & drwUi))
         {
              screen.pen = getColor(0);
-             screen.rectangle(Rect(screenWidth - (5*8), 3 * 8, 5*8, 8));
+             screen.rectangle(Rect((int32_t)((screenWidth - (5.0f*tileSize)) * scale) + xoffset, yoffset + (int32_t)(3.0f * tileSize * scale), 
+                (int32_t)(5.0f*tileSize*scale), (int32_t)(tileSize*scale)));
         }
         printNumber(maxBoardBgWidth + 1, 3, moves, 5);
     }
@@ -90,7 +92,9 @@ uint8_t drawGame(uint8_t drawWhat)
     if(drawWhat & drwLevelDone)
     {
         screen.pen = getColor(0);
-        screen.rectangle(Rect(((16 - 13) >> 1) * 8, ((maxBoardBgHeight >> 1) - 2) * 8, 14*8, 5*8));
+        screen.rectangle(Rect((int32_t)((float)(((16 - 13) >> 1) * tileSize) *scale + xoffset), 
+            ((int32_t)((float)((maxBoardBgHeight >> 1) - 2) * tileSize) * scale + yoffset), 
+            (int32_t) (14.0f*tileSize*scale), (int32_t) (5.0f*tileSize*scale)));
         printMessage(((16 - 13) >> 1), (maxBoardBgHeight >> 1) - 2, "[************]");
         printMessage(((16 - 13) >> 1), (maxBoardBgHeight >> 1) - 1, "| LEVEL DONE +");
         printMessage(((16 - 13) >> 1), (maxBoardBgHeight >> 1)    , "|            +");
@@ -101,7 +105,8 @@ uint8_t drawGame(uint8_t drawWhat)
     if(drawWhat & drwPause)
     {
         screen.pen = getColor(0);
-        screen.rectangle(Rect(0, ((maxBoardBgHeight >> 1) - 3) * 8, 16*8, 6*8));
+        screen.rectangle(Rect(xoffset,yoffset+ (int32_t)((float)((maxBoardBgHeight >> 1) - 3) * tileSize*scale), 
+            (int32_t)(16.0f*tileSize*scale), (int32_t)6.0f*tileSize*scale));
         printMessage(0, (maxBoardBgHeight >> 1) - 3, "[**************]");
         printMessage(0, (maxBoardBgHeight >> 1) - 2, "|PLEASE CONFIRM+"); 
         printMessage(0, (maxBoardBgHeight >> 1) - 1, "|              +"); 

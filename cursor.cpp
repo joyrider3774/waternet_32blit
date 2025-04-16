@@ -27,12 +27,13 @@ void drawCursors()
          return;
     
     Surface* tmp = screen.sprites;
-    screen.sprites = selectorTiles;
     uint8_t height = screenHeight;
     for (uint8_t i=0; i != cursorNumTiles; i++)
         if (spritePos[i][1] < height)
         {
-            screen.sprite(i%8, Point(spritePos[i][0], spritePos[i][1]));
+            screen.stretch_blit(selectorTiles, Rect(0,i%8*tileSize,tileSize, tileSize),
+                Rect(xoffset + (int32_t)((float)spritePos[i][0]*scale),yoffset + (int32_t)((float)spritePos[i][1]*scale), 
+                (int32_t)(tileSize*scale),(int32_t)(tileSize*scale)));
         }
     screen.sprites = tmp;
 }

@@ -6,8 +6,6 @@
 
 using namespace blit;
 
-Surface *currentTiles = nullptr;
-
 uint32_t getRandomSeed()
 {
    return now_us() * now_us();
@@ -15,7 +13,8 @@ uint32_t getRandomSeed()
 
 void set_bkg_tile_xy(uint8_t x, uint8_t y, uint8_t tile)
 {
-  screen.sprite(tile, Point(x * 8, y * 8));
+  screen.stretch_blit(screen.sprites, Rect((int32_t)((tile % 16) * tileSize), (int32_t)((tile / 16) * tileSize), (int32_t)tileSize, (int32_t)tileSize), 
+    Rect((int32_t)(xoffset + ((float)x * tileSize * scale)), yoffset + ((float)y * tileSize * scale), (int32_t)(tileSize * scale), (int32_t)(tileSize * scale)));
 }
 
 void set_bkg_data(Surface *tiles)
@@ -30,7 +29,11 @@ Surface* get_bkg_data()
 
 void set_bkg_tiles(uint8_t x, uint8_t y, Surface *map)
 {
-  screen.blit(map, Rect(0,0,map->bounds.w, map->bounds.h), Point(x * 8, y * 8));
+  screen.stretch_blit(map, Rect(0,0,map->bounds.w, map->bounds.h), 
+    Rect((int32_t)((float)x * tileSize * scale) + xoffset,
+    (int32_t)(((float)y * tileSize * scale) + yoffset), 
+    (int32_t)((float)map->bounds.w *scale), 
+    (int32_t)((float)map->bounds.h * scale)));
 }
 
 void setBlockTilesAsBackground()

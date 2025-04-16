@@ -26,7 +26,12 @@ uint32_t prevTime = 0;
 //intialisation of game & global variables
 void init()
 {
-    set_screen_mode(ScreenMode::hires, {screenWidth, screenHeight});
+    set_screen_mode(ScreenMode::hires);
+    scale = (float)screen.bounds.w / screenWidth;
+    if ((float)screenHeight * scale > screen.bounds.h)
+        scale = (float)screen.bounds.h / screenHeight;
+    xoffset = (screen.bounds.w - ((float)screenWidth*scale)) / 2;
+    yoffset = (screen.bounds.h - ((float)screenHeight*scale)) / 2;
     loadGraphics();
   
     option = 0;
@@ -50,10 +55,10 @@ void init()
 
 void render(uint32_t time) 
 {
-    //if ((prevTime != 0) && ((time - prevTime) < (1000 / frameRate)))
-    //    return;
+    if ((prevTime != 0) && ((time - prevTime) < (1000 / frameRate)))
+        return;
 
-    //prevTime = time;
+    prevTime = time;
 
     //gamestate handling
     switch (gameState)

@@ -15,7 +15,7 @@ using namespace blit;
 void drawLevelSelect() 
 {
     screen.pen = getColor(0);
-    screen.rectangle(Rect(maxBoardBgWidth * 8, 0, screenWidth - (maxBoardBgWidth * 8), screenHeight));
+    screen.rectangle(Rect(xoffset +(maxBoardBgWidth * tileSize*scale) , yoffset, (screenWidth - (maxBoardBgWidth * 8))*scale, (screenHeight)*scale));
     //LEVEL:
     printMessage(maxBoardBgWidth  , 0 , "LEVEL:");
     

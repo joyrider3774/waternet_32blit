@@ -21,7 +21,8 @@ void initLevelsCleared()
 void levelsCleared_render()
 {
     screen.pen = getColor(0);
-    screen.blit(congratsMap, Rect(0,0, congratsMap->bounds.w, congratsMap->bounds.h), Point(0,0));
+    screen.stretch_blit(congratsMap, Rect(0,0, congratsMap->bounds.w, congratsMap->bounds.h), 
+        Rect(xoffset,yoffset,(int32_t)((float)congratsMap->bounds.w*scale),(int32_t)((float) congratsMap->bounds.h*scale)));
     switch (difficulty)
     {
         case diffVeryEasy:

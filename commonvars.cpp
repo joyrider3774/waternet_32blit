@@ -22,3 +22,7 @@ Surface *congratsMap;
 Surface *selectorTiles;
 Surface *congratsScreenTiles;
 Surface *fullTitlescreenMap;
+
+float scale = 1.0f;
+int xoffset = 0;
+int yoffset = 0;
