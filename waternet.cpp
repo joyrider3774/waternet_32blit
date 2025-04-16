@@ -93,7 +93,7 @@ void render(uint32_t time)
             break;
     }
 
-    //printDebugCpuRamLoad();
+    printDebugCpuRamLoad();
  }
 
  void update(uint32_t time) {

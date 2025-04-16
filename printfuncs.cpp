@@ -83,56 +83,56 @@ void printNumber(uint8_t ax, uint8_t ay, uint16_t aNumber, size_t maxDigits)
 //     }
 //  }
 
-// //print a cpuload debug message anywhere on ax,ay using title tiles
-// void printDebugCpuRamLoad()    
-// {
-//     if(debugMode)
-//     {
-//         //rememvber current tiles
-//         Image* tiles = get_bkg_data();
-//         setBlockTilesAsBackground();
-        
-//         //get cpuload
-//         char debuginfo[16];
-//         sprintf(debuginfo, "C:%3d R:%5d", gb.getCpuLoad(), gb.getFreeRam());
+//print a cpuload debug message anywhere on ax,ay using title tiles
+void printDebugCpuRamLoad()    
+{
+    if(debugMode)
+    {
+ #if defined(TARGET_32BLIT_HW) || defined(PICO_BUILD)
 
-//         //get digits
-//         size_t len = strlen(debuginfo);
+        // memory stats
+#ifdef TARGET_32BLIT_HW
+        extern char _sbss, _end, __ltdc_start;
 
-//         //clear space for max 3 digits (i assume 100 is max or at least 999)
-//         gb.display.setColor(INDEX_BLACK);
-//         gb.display.fillRect(0, 0, 13*8, 8);
-    
-//         //print debug info
-//         for (uint8_t c = 0; c < len; c++)
-//         {
-//             uint8_t tile = 61U;
-//             switch(debuginfo[c])
-//             {
-//                 case '\0':
-//                     //restore the previous tiles
-//                     set_bkg_data(tiles);
-//                     return;
-                
-//                 case ':':
-//                     tile = 116U;
-//                     break;
-                       
-//                 default:
-//                     if ((debuginfo[c] >= 'A') && (debuginfo[c] <= 'Z'))
-//                         tile = debuginfo[c] + 25U;
-                    
-//                     if ((debuginfo[c] >= '0') && (debuginfo[c] <= '9'))
-//                         tile = debuginfo[c] + 32U;
-//                     break;
-//             }
+        auto static_used = &_end - &_sbss;
+        auto heap_total = &__ltdc_start - &_end;
+#else // pico
+        extern char __bss_start__, end, __StackLimit;
 
-//             set_bkg_tile_xy(c , 0, tile);
-//         }
-//         //restore the previous tiles
-//         set_bkg_data(tiles);
-//     }
-// }
+        auto static_used = &end - &__bss_start__;
+        auto heap_total = &__StackLimit - &end;
+#endif
+
+        auto heap_used = mallinfo().uordblks;
+
+        auto total_ram = static_used + heap_total;
+
+        Point pos(0, 0);
+        int w = screen.bounds.w;
+        int h = 10;
+
+        screen.pen = {128, 128, 128};
+        int static_px = static_used * w / total_ram;
+        screen.rectangle({pos.x, pos.y, static_px, h});
+
+        screen.pen = {255, 255, 255};
+        int heap_px = heap_used * w / total_ram;
+        screen.rectangle({pos.x + static_px, pos.y, heap_px, h});
+
+        screen.pen = {64, 64, 64};
+        screen.rectangle({pos.x + static_px + heap_px, pos.y, w - (static_px + heap_px), h});
+
+        screen.pen = {0, 0, 0};
+        screen.rectangle({pos.x, pos.y + h, w, h});
+
+        screen.pen = {255, 255, 255};
+        char buf[100];
+        snprintf(buf, sizeof(buf), "Mem: %i + %i / %i", static_used, heap_used, total_ram);
+        screen.text(buf, minimal_font, {pos.x, pos.y + h, w, h}, true, TextAlign::center_center);
+
+#endif
+    }
+}
 
 //print a message on the title screen on ax,ay, the tileset from titlescreen contains an alphabet
 void printMessage(uint8_t ax, uint8_t ay, const char* amsg)
