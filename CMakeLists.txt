@@ -1,7 +1,7 @@
 # Basic parameters; check that these match your project / environment
 cmake_minimum_required(VERSION 3.9)
 
-OPTION(DISABLE_READ_ONLY_SURFACES "Disable Readonly Surfaces" OFF) # Enabled by default
+OPTION(DISABLE_READ_ONLY_SURFACES "Disable Readonly Surfaces" ON) # Enabled by default
 
 # Replace "game" with a name for your project (this is used the name of the output)
 project(Waternet)

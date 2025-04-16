@@ -13,6 +13,8 @@ using namespace blit;
 
 void drawTitleScreen()
 {
+    screen.pen = getColor(0);
+    screen.clear();
     screen.stretch_blit(fullTitlescreenMap, Rect(0,0,fullTitlescreenMap->bounds.w, fullTitlescreenMap->bounds.h), 
         Rect(xoffset,yoffset,fullTitlescreenMap->bounds.w*scale, fullTitlescreenMap->bounds.h*scale));
 
