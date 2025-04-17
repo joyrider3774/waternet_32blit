@@ -95,7 +95,7 @@ void drawTitleScreen()
 void initTitleScreen()
 {   
     setBlockTilesAsBackground();
-    //SelectMusic(musTitle);
+    SelectMusic(musTitle);
     setPaletteTitle();
     needRedraw = 1;
 }

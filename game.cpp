@@ -138,10 +138,7 @@ void doPause()
 {
     paused = 1;
     playMenuBackSound();
-    wasSoundOn = isSoundOn();
-    wasMusicOn = isMusicOn();
-    setMusicOn(0);
-    setSoundOn(0);
+    pauseMusic();
     hideCursors();
     nextDrawWhat |= drwPause;
 }
@@ -149,8 +146,7 @@ void doPause()
 void doUnPause()
 {
     paused = 0;
-    setMusicOn(wasMusicOn);
-    setSoundOn(wasSoundOn);
+    unpauseMusic();
     setCursorPos(0, boardX + selectionX, boardY + selectionY);
     showCursors();
     nextDrawWhat |= drwUi + drwLevel + drwMoves;
@@ -393,7 +389,6 @@ void game_update()
                 //need to enable early again to play backsound
                 //normally unpause does it but we only unpause
                 //after fade
-                setSoundOn(wasSoundOn);
                 hideCursors();
                 playMenuBackSound();
                 gameState = gsInitLevelSelect;

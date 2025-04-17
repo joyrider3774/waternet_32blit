@@ -55,6 +55,7 @@ void init()
 
 void render(uint32_t time) 
 {
+    musicTimer();
     if ((prevTime != 0) && ((time - prevTime) < (1000 / frameRate)))
         return;
 
