@@ -18,10 +18,10 @@ uint8_t music_loop;
 
 constexpr uint8_t sfxSustain = 100 * 15 / frameRate;
 
-constexpr uint8_t pause1 = 14;
-constexpr uint8_t pause2 = 5;
-constexpr uint8_t pause3 = 13;
-constexpr uint8_t pause4 = 12;
+constexpr uint8_t pause1 = 13;
+constexpr uint8_t pause2 = 4;
+constexpr uint8_t pause3 = 12;
+constexpr uint8_t pause4 = 11;
 
 constexpr uint8_t NOTE_REST = 0;
 constexpr uint16_t NOTE_D6 = 1175;  // 1174.66 Hz
