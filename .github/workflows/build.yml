@@ -19,9 +19,8 @@ env:
   EM_CACHE_FOLDER: 'emsdk-cache' # Cache for Emscripten libs
 
 jobs:
-  permissions: write-all
   build:
-
+    permissions: write-all
     name: ${{matrix.name}}
     strategy:
       matrix:
