@@ -271,7 +271,7 @@ void playMusicTone(uint16_t tone, uint16_t sustain)
     {
         channels[1].waveforms   = Waveform::TRIANGLE | Waveform::SQUARE;
         channels[1].attack_ms   = 1;
-        channels[1].decay_ms    = 50*sustain;
+        channels[1].decay_ms    = 60*sustain;
         channels[1].sustain     = 0;
         channels[1].release_ms  = 1;
         channels[1].volume      = 0xffff;
