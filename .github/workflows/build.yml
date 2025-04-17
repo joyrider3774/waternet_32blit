@@ -19,7 +19,6 @@ env:
   EM_CACHE_FOLDER: 'emsdk-cache' # Cache for Emscripten libs
 
 jobs:
-&
   build:
 
     name: ${{matrix.name}}
