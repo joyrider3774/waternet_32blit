@@ -269,7 +269,7 @@ void playMusicTone(uint16_t tone, uint16_t sustain)
         channels[1].off();
     else
     {
-        channels[1].waveforms   = Waveform::TRIANGLE | Waveform::SQUARE;
+        channels[1].waveforms   = Waveform::SQUARE;
         channels[1].attack_ms   = 1;
         channels[1].decay_ms    = 60*sustain;
         channels[1].sustain     = 0;
@@ -428,7 +428,7 @@ void playSound(uint16_t tone)
     if(!sound_on)
         return;
     
-    channels[0].waveforms   = Waveform::TRIANGLE | Waveform::SQUARE;
+    channels[0].waveforms   = Waveform::SQUARE;
     channels[0].attack_ms   = 16;
     channels[0].decay_ms    = sfxSustain;
     channels[0].sustain     = 0;
