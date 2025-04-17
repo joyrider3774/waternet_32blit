@@ -7,9 +7,11 @@
 
 #include <32blit.hpp>
 
+blit::Timer timer_music;
+
 //I (joyrider3774) created the music in this tool : https://onlinesequencer.net
 
-uint8_t prev_music, music_on, sound_on, music_pause;
+uint8_t prev_music, music_on, sound_on, music_pause, music_selecting;
 uint16_t track[255];
 uint16_t music_note, music_tempo, tracklen;
 uint8_t music_loop;
@@ -263,7 +265,7 @@ const uint16_t music_intro[] = {
 
 void playMusicTone(uint16_t tone, uint16_t sustain)
 {
-    if(tone == 0)
+    if((tone == 0) || music_selecting)
         channels[1].off();
     else
     {
@@ -279,7 +281,10 @@ void playMusicTone(uint16_t tone, uint16_t sustain)
 }
 
 void playNote()
-{    
+{   
+    if(music_selecting)
+        return;
+
     if(music_note < tracklen)
     {
         //Set the new delay to wait
@@ -310,8 +315,10 @@ void unpauseMusic()
     music_pause = 0;
 }
 
-void musicTimer()
+void musicTimer(blit::Timer &t)
 {
+    if(music_selecting)
+        return;
     if(music_pause)
         return;
     //Play some music
@@ -382,6 +389,7 @@ void SelectMusic(uint8_t musicFile, uint8_t force)
 {
     if (((prev_music != musicFile) || force) && music_on)
     {
+        music_selecting = 1;
         music_pause = 0;
         prev_music = musicFile;
         channels[1].off();
@@ -411,6 +419,7 @@ void SelectMusic(uint8_t musicFile, uint8_t force)
         }
         music_note = 0;
         music_tempo = 0;
+        music_selecting = 0;
     }
 }
 
@@ -433,6 +442,8 @@ void initMusic()
 {
     music_on = 0;
     prev_music = 0;
+    timer_music.init(musicTimer, 16, -1);
+    timer_music.start();
 }
 
 void playGameMoveSound()

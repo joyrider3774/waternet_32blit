@@ -2,6 +2,7 @@
 #define SOUND_H
 
 #include <stdint.h>
+#include <32blit.hpp>
 
 constexpr uint8_t musGame = 1;
 constexpr uint8_t musTitle = 2;
@@ -11,7 +12,7 @@ constexpr uint8_t musAllLevelsClear = 4;
 void initSound();
 void SelectMusic(uint8_t musicFile, uint8_t force = 0);
 void initMusic();
-void musicTimer();
+void musicTimer(blit::Timer &t);
 void pauseMusic();
 void stopMusic();
 void unpauseMusic();
