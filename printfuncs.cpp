@@ -138,8 +138,9 @@ void printDebugCpuRamFpsLoad(uint32_t start_frame, uint32_t end_frame)
         uint32_t us = end_frame - start_frame;
         if (us == 0)
             us = 1;   
+        uint32_t fps = 1000000.0 / us;
         char buf2[100];
-        snprintf(buf2, sizeof(buf2), "FPS: %.2f", (1000000.0 / (double)us));
+        snprintf(buf2, sizeof(buf2), "FPS: %ld", fps);
         screen.pen = Pen(255,255,255);
         screen.rectangle(Rect(1, screen.bounds.h - 10,  12 * 6 + 2, 10));
         screen.pen = Pen(0,0,0);
