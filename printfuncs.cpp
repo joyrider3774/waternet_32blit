@@ -88,7 +88,7 @@ void printNumber(uint8_t ax, uint8_t ay, uint16_t aNumber, size_t maxDigits)
 //  }
 
 //print a cpuload debug message anywhere on ax,ay using title tiles
-void printDebugCpuRamLoad()    
+void printDebugCpuRamFpsLoad(uint32_t start_frame, uint32_t end_frame)
 {
     if(debugMode)
     {
@@ -135,7 +135,16 @@ void printDebugCpuRamLoad()
         screen.text(buf, minimal_font, {pos.x, pos.y + h, w, h}, true, TextAlign::center_center);
 
 #endif
-    }
+        uint32_t us = end_frame - start_frame;
+        if (us == 0)
+            us = 1;   
+        char buf2[100];
+        snprintf(buf2, sizeof(buf2), "FPS: %.2f", (1000000.0 / (double)us));
+        screen.pen = Pen(255,255,255);
+        screen.rectangle(Rect(1, screen.bounds.h - 10,  12 * 6 + 2, 10));
+        screen.pen = Pen(0,0,0);
+        screen.text(buf2, minimal_font, {1, screen.bounds.h - 9}, true, TextAlign::top_left);
+    }    
 }
 
 //print a message on the title screen on ax,ay, the tileset from titlescreen contains an alphabet

@@ -431,35 +431,47 @@ void helpSlide2_update()
 
 void helpRotateSlide_render() 
 {
+    //always redraw
+    needRedraw = 1;
     helpLegend_render();
 }
 
 //ACTIONS SLIDE + ROTATE
 void helpRotateSlide2_render() 
 {
+    //always redraw
+    needRedraw = 1;
     helpDoSlideRotate_render();
 }
 
 //LEGEND + FINISHLEVEL STATE
 void helpRotate_render()
 {
+    //always redraw
+    needRedraw = 1;
     helpLegend_render();
 }
 
 //ACTIONS ROTATE
 void helpRotate2_render()
 {
+    //always redraw
+    needRedraw = 1;
     helpDoSlideRotate_render();
 }
 
 //LEGEND STATE
 void helpSlide_render()
 {
+    //always redraw
+    needRedraw = 1;
     helpLegend_render();
 }
 
 //ACTIONS SLIDE
 void helpSlide2_render()
 {
+    //always redraw
+    needRedraw = 1;
     helpDoSlideRotate_render();
 }

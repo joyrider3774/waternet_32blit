@@ -16,7 +16,7 @@ uint16_t track[255];
 uint16_t music_note, music_tempo, tracklen;
 uint8_t music_loop;
 
-constexpr uint8_t sfxSustain = 100 * 15 / frameRate;
+constexpr uint8_t sfxSustain = 100 * 15 / 18;
 
 constexpr uint8_t pause1 = 13;
 constexpr uint8_t pause2 = 4;

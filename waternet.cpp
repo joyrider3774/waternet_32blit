@@ -21,8 +21,6 @@
 
 using namespace blit;
 
-uint32_t prevTime = 0;
-
 //intialisation of game & global variables
 void init()
 {
@@ -55,11 +53,7 @@ void init()
 
 void render(uint32_t time) 
 {
-    if ((prevTime != 0) && ((time - prevTime) < (1000 / frameRate)))
-        return;
-
-    prevTime = time;
-
+    uint32_t start = now_us();
     //gamestate handling
     switch (gameState)
     {
@@ -97,8 +91,8 @@ void render(uint32_t time)
             intro_render();
             break;
     }
-
-    printDebugCpuRamLoad();
+    
+    printDebugCpuRamFpsLoad(start, now_us());
  }
 
  void update(uint32_t time) {

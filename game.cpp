@@ -12,7 +12,8 @@
 
 using namespace blit;
 
-uint8_t paused, wasMusicOn, wasSoundOn,DrawLevelDoneBit, nextDrawWhat, levelDoneFrames;
+uint8_t paused, wasMusicOn, wasSoundOn,DrawLevelDoneBit, nextDrawWhat;
+uint32_t levelDoneTime = 0;
 constexpr uint8_t drwNone = 0;
 constexpr uint8_t drwMoves = 1;
 constexpr uint8_t drwUi = 2;
@@ -20,7 +21,7 @@ constexpr uint8_t drwLevel = 4;
 constexpr uint8_t drwLevelDone = 8;
 constexpr uint8_t drwPause = 16;
 constexpr uint8_t drwPartialLevel = 32;
-constexpr uint8_t maxLevelDoneFrames = 8 * frameRate / 15;
+constexpr uint32_t maxLevelDoneTime = 750;
 
 
 uint8_t drawGame(uint8_t drawWhat)
@@ -115,7 +116,7 @@ uint8_t drawGame(uint8_t drawWhat)
         printMessage(0, (maxBoardBgHeight >> 1) + 2, "<##############>");
     }
     
-    return drwNone;
+    return drawWhat;
 }
 
 void initGame()
@@ -129,7 +130,7 @@ void initGame()
     initCursors();
     setCursorPos(0, boardX + selectionX, boardY + selectionY);
     showCursors();
-    levelDoneFrames = 0;
+    levelDoneTime = 0;
     levelDone = 0;
     nextDrawWhat = drwUi + drwLevel + drwMoves;
 }
@@ -140,7 +141,7 @@ void doPause()
     playMenuBackSound();
     pauseMusic();
     hideCursors();
-    nextDrawWhat |= drwPause;
+    nextDrawWhat = drwUi + drwLevel + drwMoves + drwPause;
 }
 
 void doUnPause()
@@ -149,7 +150,7 @@ void doUnPause()
     unpauseMusic();
     setCursorPos(0, boardX + selectionX, boardY + selectionY);
     showCursors();
-    nextDrawWhat |= drwUi + drwLevel + drwMoves;
+    nextDrawWhat = drwUi + drwLevel + drwMoves;
 }
 
 void game_render()
@@ -158,19 +159,13 @@ void game_render()
     
     if(levelDone)
     {
-        if(levelDoneFrames > 1)
-            --levelDoneFrames;
-        else if (levelDoneFrames == 1)
+        if (now() - levelDoneTime > maxLevelDoneTime)
         {
-            nextDrawWhat |= drwLevelDone;
-            --levelDoneFrames;
+            nextDrawWhat = drwUi + drwLevel + drwMoves + drwLevelDone;
         }
     }
-    //don't redraw level anymore based on cursors if level is done
     else
-        if (updateCursorFrame())
-            nextDrawWhat |= drwPartialLevel;
-
+        updateCursorFrame();
 }
 
 void game_update()
@@ -194,7 +189,7 @@ void game_update()
             //set to border on top
                 selectionY = -posAdd;
             setCursorPos(0, boardX + selectionX, boardY + selectionY);
-            nextDrawWhat |= drwPartialLevel;
+            //nextDrawWhat |= drwPartialLevel;
         }
     } 
 
@@ -210,7 +205,7 @@ void game_update()
             //set to border on bottom
                 selectionY = boardHeight -1 +posAdd;
             setCursorPos(0, boardX + selectionX, boardY + selectionY);
-            nextDrawWhat |= drwPartialLevel;
+            //nextDrawWhat |= drwPartialLevel;
         }
     }
 
@@ -226,7 +221,7 @@ void game_update()
             //set to border on left
                 selectionX = -posAdd;
             setCursorPos(0, boardX + selectionX, boardY + selectionY);
-            nextDrawWhat |= drwPartialLevel;
+           // nextDrawWhat |= drwPartialLevel;
         }
     }
 
@@ -242,7 +237,7 @@ void game_update()
             else
                 selectionX = boardWidth -1 + posAdd;
             setCursorPos(0, boardX + selectionX, boardY + selectionY);
-            nextDrawWhat |= drwPartialLevel;
+            //nextDrawWhat |= drwPartialLevel;
         }
     }
 
@@ -266,7 +261,7 @@ void game_update()
                         moves++;
                         updateConnected();
                         playGameAction();
-                        nextDrawWhat |= (drwPartialLevel+drwMoves);
+                        //nextDrawWhat |= (drwPartialLevel+drwMoves);
                     }
                     else
                     {
@@ -283,7 +278,7 @@ void game_update()
                             moves++;
                             updateConnected();
                             playGameAction();
-                            nextDrawWhat |= (drwPartialLevel+drwMoves);
+                           // nextDrawWhat |= (drwPartialLevel+drwMoves);
                         }
                         else
                         {
@@ -293,7 +288,7 @@ void game_update()
                                 moves++;
                                 updateConnected();
                                 playGameAction();
-                                nextDrawWhat |= (drwPartialLevel+drwMoves);
+                               // nextDrawWhat |= (drwPartialLevel+drwMoves);
                             }
                         }
                     }
@@ -307,7 +302,7 @@ void game_update()
                                 moves++;
                                 updateConnected();
                                 playGameAction();
-                                nextDrawWhat |= (drwPartialLevel+drwMoves);
+                               // nextDrawWhat |= (drwPartialLevel+drwMoves);
                             }
                             else
                             {
@@ -317,7 +312,7 @@ void game_update()
                                     updateConnected();
                                     moves++;
                                     playGameAction();
-                                    nextDrawWhat |= (drwPartialLevel+drwMoves);
+                                  //  nextDrawWhat |= (drwPartialLevel+drwMoves);
                                 }
                             }
                         }
@@ -330,7 +325,7 @@ void game_update()
                 levelDone = isLevelDone(); 
                 if(levelDone)
                 {
-                    levelDoneFrames = maxLevelDoneFrames;
+                    levelDoneTime = now();
                     SelectMusic(musLevelClear);
                     //hide cursor it's only sprite we use
                     hideCursors();
@@ -338,7 +333,7 @@ void game_update()
             }
             else
             {
-                if (levelDoneFrames == 0)
+                if (now() - levelDoneTime > maxLevelDoneTime)
                 {
                     //goto next level
                     if (difficulty == diffRandom)

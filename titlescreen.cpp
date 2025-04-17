@@ -102,6 +102,7 @@ void initTitleScreen()
 
 void titleScreen_render()
 {
+    needRedraw = 1;
     if(needRedraw)
     {
         drawTitleScreen();

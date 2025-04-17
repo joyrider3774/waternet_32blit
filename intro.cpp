@@ -7,9 +7,9 @@
 
 using namespace blit;
 
-uint16_t frames;
+uint32_t startTime, prevTime = 0;
 float titlePosY;
-constexpr uint8_t frameDelay = 16 * frameRate / 15;    
+constexpr uint16_t frameDelay = 750;
 
 
 void initIntro()
@@ -17,27 +17,26 @@ void initIntro()
     setPaletteTitle();
     setBlockTilesAsBackground();
     titlePosY = screenHeight;
-    frames = 0;   
+    startTime = now();
 }
 
 void intro_render()
 {
-    frames++;
-
     screen.pen = getColor(0);
     screen.clear();
 
-    if (frames < frameDelay)
+    if (now() - startTime < frameDelay)
     {
         //20-12
         printMessage(8 >> 1, 7, "WILLEMS DAVY");
     }
     else
     {
-        if (frames < frameDelay *2)
+        if (now() - startTime < frameDelay *2)
         {
             //20-8
             printMessage(12 >> 1, 7, "PRESENTS");
+            prevTime = now();
         }
         else
         {
@@ -48,7 +47,8 @@ void intro_render()
                 (int32_t)((float)titlescreen->bounds.h*scale)));
             if(titlePosY > 0)
             {
-                titlePosY -= (float)60/(float)frameRate;
+                titlePosY -=  1.0f/60.0f*3.33f * (now()-prevTime);
+                prevTime = now();
             }
             else
             {
